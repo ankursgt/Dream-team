@@ -1,0 +1,4 @@
+<label>{{group}}</label>
+  <input #in type="text" (keyup)="gettrigger(in.value)" id={{group}}>
+  <p *appGenerate="numberofinputs">
+    <input type="text" class={{group}}>
