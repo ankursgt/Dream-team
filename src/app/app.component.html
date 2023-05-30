@@ -1,12 +1,29 @@
-<div class="container">
+<div class="d-flex justify-content-around mt-4">
 <div  *ngFor="let group of teamGroup">
     <app-group [group]="group" (validated)="requiredContainer($event)"></app-group>
 </div>
 </div>
 
-<div class="container" [ngClass]="{'required-container': hideRequired}">
-<label>Required<span style="color:red">*</span> :</label>
-<input type="text" style="width: 80%" class="required">
+<div class="container" [ngClass]="teamGroup.length === noOfGroupResponse ? 'd-block' : 'd-none'">
+
+<label>Top picks<span> <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="top" title="Enter player names you want in your team at all cost as comma seprated values">
+    <span class="material-symbols-outlined">
+        info
+        </span>
+  </button></span> </label>
+<input #top type="text" style="width: 80%" (blur)="pushTopChange(top.value)">
+</div>
+
+<div [ngClass]="showButton ? 'd-flex justify-content-center my-4' : 'd-none'">
+    <button class="btn btn-primary " (click)="submit()">Generate Teams</button>
+</div>
+
+<div *ngFor="let team of allTeams; let i=index" class="d-flex align-items-center">
+    <p>T{{i+1}}:&nbsp;</p>
+    <div *ngFor="let player of team" class="d-flex flex-column align-items-center px-2">
+        <img src="../assets/{{ player.group }}.png" alt={{group}} width="50" height="50"/>
+        <h5>{{player.name}},&nbsp;</h5>
+    </div>
 </div>
 
 

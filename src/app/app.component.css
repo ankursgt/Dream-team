@@ -1,9 +1,10 @@
-.container {
-    display: flex;
-    justify-content: space-between;
+
+
+.d-block {
+    display: block;
+    margin-top: 16px;
 }
 
-.required-container {
+.d-none {
     display: none;
-    margin-top: 16px;
 }

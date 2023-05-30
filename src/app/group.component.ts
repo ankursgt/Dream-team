@@ -1,4 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { delay, concatMap, map, mergeMap, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { of } from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-group',
@@ -7,39 +10,42 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 })
 export class GroupComponent implements OnInit {
   @Input() group: string;
-  @Output() validated =  new EventEmitter<boolean>()
+  @Output() validated =  new EventEmitter<any[]>();
 
   numberofinputs: number;
   keeperSelector;
   batsmanSelector;
   allRounderSelector;
   bowlerSelector;
+  arr = [];
 
+  flag =0;
+
+  constructor(){
+
+  }
   
 
   ngOnInit(){
-    this.keeperSelector = document.querySelector('#Keeper');
-    this.batsmanSelector = document.querySelector('#Batsman');
-    this.allRounderSelector = document.querySelector('#All-Rounder');
-    this.bowlerSelector = document.querySelector('#Bowler');
-    console.log(this.keeperSelector, this.batsmanSelector, this.allRounderSelector, this.bowlerSelector);
+    
   }
 
  
 
-  gettrigger(n) {
-    this.numberofinputs = n;
-    // if(this.bowlerSelector && this.bowlerSelector.value){
-        this.validateInputs();
-    //}
-   
-    
+  gettrigger(event) {
+    this.numberofinputs = event.target.value;
   }
 
-  validateInputs() {
-    console.log("came");
-    if(this.keeperSelector.value && this.batsmanSelector.value && this.allRounderSelector.value && this.bowlerSelector.value) {
-        this.validated.emit(true);
+  pushChange(name, group) {
+    if(!name){
+      return;
     }
+    this.flag++;
+    let entry = {name: name, group: group};
+    this.arr.push(entry);
+    if(this.flag == this.numberofinputs){
+      this.validated.emit(this.arr);
+    }
+   
   }
 }

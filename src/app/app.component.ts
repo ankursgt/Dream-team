@@ -1,4 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { generateTeams } from './logic';
+import { testallPlayers, testtopPlayers } from './testdata';
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -18,17 +21,44 @@ export class AppComponent implements OnInit{
 
   hideRequired = true;
 
+  noOfGroupResponse = 0;
+
+  showButton = false;
+
+  allPlayers = [];
+  topPlayers = [];
+  allTeams = [];
+
+
   
 
   ngOnInit(){
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    })
+    
+  }
 
-    // for(var i in this.groupofchat){
-    //   this.totalchats += this.groupofchat[i];
-    //  }
+  submit() {
+    // this.allPlayers = testallPlayers;
+    // this.topPlayers = testtopPlayers;
+    this.allTeams = generateTeams(this.allPlayers, this.topPlayers);
   }
 
   requiredContainer(event){
-    this.hideRequired = event;
+    this.noOfGroupResponse++;
+   event.forEach(element => {
+    this.allPlayers.push(element);
+   })
+  }
+
+  pushTopChange(value: string) {
+    const top =  value.replace(" ", "").split(",");
+
+    this.topPlayers = this.allPlayers.filter(a =>
+        Object.keys(a).some(p => top.includes(a[p])));
+
+    this.showButton = this.topPlayers.length ? true : false;
   }
 
 messageMapping:

@@ -1,4 +1,6 @@
+<div [ngClass]="group == 'All-Rounder' ? 'col-md-6' : 'col-md-3'">
 <label>{{group}}</label>
-  <input #in type="text" (keyup)="gettrigger(in.value)" id={{group}}>
-  <p *appGenerate="numberofinputs">
-    <input type="text" class={{group}}>
+  <input  type="text" (keyup)="gettrigger($event)" id="{{group}}">
+  <p *appGenerate="numberofinputs" class="genp" >
+    <input #player type="text" class={{group}} placeholder="Enter name of {{group}}" (blur)="pushChange(player.value, group)"> 
+  </div>
