@@ -59,14 +59,15 @@ let checkSubset =  topPlayers.every(function(val) {
 	// in arr[] of size n. This function mainly uses combinationUtil()
 	export function generateTeams(arr, top)
 	{
-    let noOfPlayers = 11;
-    let n = arr.length;
-		// A temporary array to store all combination one by one
-		let data = new Array(noOfPlayers);
-		
-		// Generate teams using temporary array 'data[]'
-		combinationUtil(arr, data, 0, n-1, 0, noOfPlayers, top);
-      return allTeams;
+		allTeams = [];
+		let noOfPlayers = 11;
+		let n = arr.length;
+			// A temporary array to store all combination one by one
+			let data = new Array(noOfPlayers);
+			
+			// Generate teams using temporary array 'data[]'
+			combinationUtil(arr, data, 0, n-1, 0, noOfPlayers, top);
+		return allTeams;
 	}
 
 	
