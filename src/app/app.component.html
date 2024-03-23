@@ -14,8 +14,11 @@
 <textarea #top type="text" style="width: 100%" (blur)="pushTopChange(top.value)"></textarea>
 </div>
 
-<div [ngClass]="showButton ? 'd-flex justify-content-center my-4' : 'd-none'">
-    <button class="btn btn-primary " (click)="submit()">Generate Teams</button>
+<div [ngClass]="showButton ? 'd-flex justify-content-around my-4' : 'd-none'">
+    <button class="btn btn-primary " (click)="submit()">Generate Teams<span class="small">
+        ({{ this.allPlayers.length - this.topPlayers.length}}C{{11 - this.topPlayers.length}})
+    </span></button>
+    <button class="btn btn-secondary" (click)="clear()">Clear Teams</button>
 </div>
 
 <div *ngFor="let team of allTeams; let i=index" class="d-flex align-items-center">

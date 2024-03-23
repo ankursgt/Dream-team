@@ -45,6 +45,10 @@ export class AppComponent implements OnInit{
     this.allTeams = generateTeams(this.allPlayers, this.topPlayers);
   }
 
+  clear() {
+    this.allTeams = [];
+  }
+
   requiredContainer(event){
     this.noOfGroupResponse++;
    event.forEach(element => {
